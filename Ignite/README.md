@@ -86,7 +86,7 @@ ls
 flag.txt
 www-data@ubuntu:/home/www-data$ cat flag.txt
 cat flag.txt
-6470e394cbf6dab6a91682cc8585059b
+********************************
 ```
 
 Also, in the directory `/var/www/html/fuel/application/config` I came upon a `database.php` so I printed the contents of the file which gave me the following interesting information:
@@ -96,7 +96,7 @@ $db['default'] = array(
         'dsn'   => '',
         'hostname' => 'localhost',
         'username' => 'root',
-        'password' => 'mememe',
+        'password' => '******',
         'database' => 'fuel_schema',
         'dbdriver' => 'mysqli',
         'dbprefix' => '',
@@ -123,7 +123,7 @@ ls
 root.txt                        
 root@ubuntu:~# cat root.txt     
 cat root.txt                    
-b9bbcb33e11b80be759c4e844862482d
+********************************
 ```
 
 ## License
