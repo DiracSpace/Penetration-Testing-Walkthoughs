@@ -123,8 +123,5 @@ Content-Length: 33
 ********************************
 ```
 
-# My Account
-<script src="https://tryhackme.com/badge/41721"></script>
-
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
