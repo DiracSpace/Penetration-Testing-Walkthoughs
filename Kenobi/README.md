@@ -223,7 +223,7 @@ kenobi@kenobi:~$ ls
 share  user.txt
 ```
 
-Here we were able to find the first flag or `user.txt`. We not need to elevate our privileges, I was going to try and enumerate my current sudo permissions but I don't have Kenobi's password. The next thing to see is that we can elevate the privileges with SUID Binaries. TryHackMe gave us the following command to enumerate the files and we can check with our filesystem to try finding the unusual ones.
+Here we were able to find the first flag or `user.txt`. We need to elevate our privileges, I was going to try and enumerate my current sudo permissions but I don't have Kenobi's password. The next thing to see is that we can elevate the privileges with SUID Binaries. TryHackMe gave us the following command to enumerate the files and we can check with our filesystem to try finding the unusual ones.
 
 ```
 $ find / -perm -u=s -type f 2>/dev/null
