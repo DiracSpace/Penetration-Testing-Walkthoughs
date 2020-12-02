@@ -16,7 +16,7 @@ Good luck!
 
 It's pretty obvious we need the ID given to us to pass the authentication. What we need is to pass the value as a parameter, like so `http://machine-ip/?id=****************`.
 
-[1.png]
+![Starting site](https://github.com/DiracSpace/Penetration-Testing-Walkthoughs/blob/main/AdventOfCyber2/dayTwo/screenshots/1.png)
 
 From here, we are redirected to the "dashboard" and we can see two buttons. One is obviously asking us to select and submit a file for uploading. 
 
@@ -24,11 +24,11 @@ From here, we are redirected to the "dashboard" and we can see two buttons. One 
 
 While it doesn't actually tell us, we can check the `HTML` and view the input types. What I had done previously was go to `inspect element` and view the `sources` tab. Here I found `CSS, JS and IMG` folders, so that's how i answered this one.
 
-[2.png]
+![Upload picture](https://github.com/DiracSpace/Penetration-Testing-Walkthoughs/blob/main/AdventOfCyber2/dayTwo/screenshots/2.png)
 
 What I did for this, I remembered two things. The first was that when I did the room [Ignite](https://tryhackme.com/room/ignite), we used `netcat` to open a listener for incoming connections. Plus, [pentestmonkey](https://github.com/pentestmonkey/php-reverse-shell) has a `PHP Reverse Shell` which was mentioned to us in the task introductory. So, what I eventually did was change the file extensión to `.jpg.php` and uploaded that bad boy
 
-[3.png]
+![Uploading obfuscated php shell](https://github.com/DiracSpace/Penetration-Testing-Walkthoughs/blob/main/AdventOfCyber2/dayTwo/screenshots/3.png)
 
 ```
 > nc -lvnp port
@@ -39,7 +39,7 @@ listening on [any] port ...
 
 This question was also given to us in the introductory, the only problem was that they didn't specify that the ID parameter was going to always be present. So the directory is `http://machine-ip/uploads/?id=****************`.
 
-[4.png]
+![Executing](https://github.com/DiracSpace/Penetration-Testing-Walkthoughs/blob/main/AdventOfCyber2/dayTwo/screenshots/4.png)
 
 `Activate your reverse shell and catch it in a netcat listener!`
 
