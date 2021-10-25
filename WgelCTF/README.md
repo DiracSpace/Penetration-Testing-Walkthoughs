@@ -122,7 +122,11 @@ And bingo! We found an `SSH` key that could belong to the user found previously.
 
 ### Dirbuster
 
-Using dirbuster, I was able to find `http://10.10.33.168/sitemap/`. Here, I decided to try getting an indexing page and stumbled upon `http://10.10.33.168/sitemap/.ssh/` which gave me an `id_rsa`. Quickly, I downloaded the key and prepared myself for SSH login.
+Using dirbuster, I was able to find `http://ip/sitemap/` and the previous mentioned information. Here, I decided to try getting an indexing page and stumbled upon `http://10.10.33.168/sitemap/.ssh/` which gave me an `id_rsa`. 
+
+# Initial foothold
+
+Quickly, I downloaded the key and prepared myself for SSH login.
 
 First, I renamed the file to match with the user \
 `mv id_rsa.txt id_jessie`
