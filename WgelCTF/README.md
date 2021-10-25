@@ -67,6 +67,10 @@ So, we can guess the user is `Jessie`.
 
 With `Gobuster` I was able to determine that the url given to us had a directory in it.
 
+`gobuster dir -u http://ip/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt`
+
+I found.
+
 ```
 ===============================================================
 Gobuster v3.1.0
@@ -87,6 +91,10 @@ Progress: 145 / 220561 (0.07%)
 ```
 
 Upon searching the site found in that directory, I couldn't find anything useful so I returned to the directory enumeration on this new url. With the common files found I just didn't find anything useful in other directories or files. So, I decided to find other type of files and extensions.
+
+`gobuster dir -u http://ip/sitemap -w /usr/share/wordlists/dirb/common.txt`
+
+I found.
 
 ```
 ===============================================================
