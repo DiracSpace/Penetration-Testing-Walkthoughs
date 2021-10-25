@@ -30,7 +30,11 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 107.68 seconds
 ```
 
-Realizing that `SSH` was open, I went to the website to see if maybe we can get some credentials or a key. Upon entering `http://10.10.33.168/` I noticed that it was the default starting template for Apache2. The strange thing was that the listing was wrong, look:
+Realizing that `SSH` amd `HTTP` was open, I went to the website to see if maybe we can get some more information about the server. 
+
+# Web Analysis
+
+Upon entering `http://10.10.33.168/` I noticed that it was the default starting template for Apache2. The strange thing was that the listing was wrong, look:
 
 ```bash
 /etc/apache2/
@@ -49,13 +53,66 @@ Realizing that `SSH` was open, I went to the website to see if maybe we can get 
           
 ```
 
-If you've used Apache2 before, you'd know something was wrong, so I viewed the source file and found this:
+If you've used Apache2 before, you'd know something was wrong too, so I viewed the source file and found this:
 
 ```
  <!-- Jessie don't forget to udate the webiste -->
 ```
 
 So, we can guess the user is `Jessie`.
+
+# Directory Enumeration
+
+### Gobuster 
+
+With `Gobuster` I was able to determine that the url given to us had a directory in it.
+
+```
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.178.77
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2021/10/24 16:59:12 Starting gobuster in directory enumeration mode
+===============================================================
+/sitemap              (Status: 301) [Size: 314] [--> http://10.10.178.77/sitemap/]
+Progress: 145 / 220561 (0.07%)    
+```
+
+Upon searching the site found in that directory, I couldn't find anything useful so I returned to the directory enumeration on this new url. With the common files found I just didn't find anything useful in other directories or files. So, I decided to find other type of files and extensions.
+
+```
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.178.77/sitemap/
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirb/common.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2021/10/24 17:02:39 Starting gobuster in directory enumeration mode
+===============================================================
+/.hta                 (Status: 403) [Size: 277]
+/.htaccess            (Status: 403) [Size: 277]
+/.htpasswd            (Status: 403) [Size: 277]
+/.ssh                 (Status: 301) [Size: 319] [--> http://10.10.178.77/sitemap/.ssh/]
+Progress: 172 / 4615 (3.73%) 
+```
+
+And bingo! We found an `SSH` key that could belong to the user found previously.
+
+### Dirbuster
 
 Using dirbuster, I was able to find `http://10.10.33.168/sitemap/`. Here, I decided to try getting an indexing page and stumbled upon `http://10.10.33.168/sitemap/.ssh/` which gave me an `id_rsa`. Quickly, I downloaded the key and prepared myself for SSH login.
 
